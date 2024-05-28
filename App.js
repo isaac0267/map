@@ -14,7 +14,14 @@ export default function App() {
   })
 
   function addMarker(data){
-   alert("Hej champine");
+    const {latitude,longitude}=data.nativeEvent.coordinate
+    const newMarker={
+      coordinate:{latitude,longitude},
+      key:data.timeStamp,
+      title:"Great place"
+    }
+    setMarkers([...markers,newMarker])
+ 
      
   }
   return (
@@ -24,15 +31,13 @@ export default function App() {
        region={reigion}
        onLongPress={addMarker}
       >
-        {markers.map(marker=>(
-          <Marker
-            coordinate={marker.coordinate}
-            key={marker.key}
-            title={marker.title}
-          />
-        ))
-          
-        }
+       {markers.map(marker =>(
+       <Marker
+         coordinate={marker.coordinate}
+         key={marker.key}
+         title={marker.title}
+       />
+       ))}
        
       </MapView>
     </View>
